@@ -1,3 +1,5 @@
+import { Store } from 'express-session';
+
 export type MySQLSessionStoreOptions = {
 
 	/** Host name for database connection: */
@@ -49,21 +51,29 @@ export type MySQLSessionStoreOptions = {
 	}
 }
 
-
+export interface Connection {
+	//XXX fill in with mysql typings + copy over to internal functions
+	query(sql: any, params: any): Promise<[any, any]>; //no callback, returns promise
+	query(sql: any, params: any, cb: (err: any | null, rows: any, fields: any) => void): any; //callback, returns non-promise
+	
+	end(): Promise<void>;
+	end(cb: (err: any | null) => void): void;
+}
 
 export class MySQLStore {
-	constructor(options: MySQLSessionStoreOptions, connection?: any, callback?: (error?: any) => void);
-	constructor(options: Partial<MySQLSessionStoreOptions>, connection: any, callback?: (error?: any) => void);
+	constructor(options: MySQLSessionStoreOptions, connection?: Connection, callback?: (error?: any) => void);
+	constructor(options: Partial<MySQLSessionStoreOptions>, connection: Connection, callback?: (error?: any) => void);
 
 	setOptions(options: MySQLSessionStoreOptions): any;
-	validateOptions(options: any): boolean;
+	validateOptions(options: any): options is MySQLSessionStoreOptions | never;
 	createDatabaseTable(cb: (error?: any) => void): any;
 
+	clearExpiredSessions(cb: (error?: any) => void): any;
+	setExpirationInterval(interval: number): any;
+	clearExpirationInterval(): any;
+	
 	// Internal functions
-	private query(sql: any, params: any, cb: any): any;
-	private clearExpiredSessions(cb: (error?: any) => void): any;
-	private setExpirationInterval(interval: number): any;
-	private clearExpirationInterval(): any;
+	private query(sql: any, params: any, cb: (err: any | null, rows: any, fields: any) => void): any;
 	private close(cb: (error?: any) => void): any;
 
 	// Implemented Store methods

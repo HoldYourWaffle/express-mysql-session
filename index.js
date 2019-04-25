@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = require('underscore');
-var mysql = require('mysql');
 var path = require('path');
 var util = require('util');
 
@@ -34,7 +33,7 @@ module.exports = function(session) {
 		this.setOptions(options);
 
 		if (!this.connection) {
-			this.connection = mysql.createPool(this.options);
+			this.connection = require('mysql').createPool(this.options);
 		}
 
 		var done = function() {
