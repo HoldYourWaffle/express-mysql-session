@@ -1,6 +1,7 @@
-import { Store } from 'express-session';
+import express from 'express'
+import { Store } from 'express-session'
 
-export type MySQLSessionStoreOptions = {
+export interface MySQLSessionStoreOptions {
 
 	/** Host name for database connection: */
 	host: string;
@@ -55,12 +56,12 @@ export interface Connection {
 	//XXX fill in with mysql typings + copy over to internal functions
 	query(sql: any, params: any): Promise<[any, any]>; //no callback, returns promise
 	query(sql: any, params: any, cb: (err: any | null, rows: any, fields: any) => void): any; //callback, returns non-promise
-	
+
 	end(): Promise<void>;
 	end(cb: (err: any | null) => void): void;
 }
 
-export class MySQLStore {
+export class MySQLStore extends Store {
 	constructor(options: MySQLSessionStoreOptions, connection?: Connection, callback?: (error?: any) => void);
 	constructor(options: Partial<MySQLSessionStoreOptions>, connection: Connection, callback?: (error?: any) => void);
 
@@ -77,13 +78,13 @@ export class MySQLStore {
 	private close(cb: (error?: any) => void): any;
 
 	// Implemented Store methods
-	get: (sid: string, callback: (err: any, session?: Express.SessionData | null) => void) => void;
-	set: (sid: string, session: Express.SessionData, callback?: (err?: any) => void) => void;
+	get: (sid: string, callback: (err: any, session?: SessionData | null) => void) => void;
+	set: (sid: string, session: SessionData, callback?: (err?: any) => void) => void;
 	destroy: (sid: string, callback?: (err?: any) => void) => void;
-	all: (callback: (err: any, obj?: { [sid: string]: Express.SessionData; } | null) => void) => void;
+	all: (callback: (err: any, obj?: { [sid: string]: SessionData; } | null) => void) => void;
 	length: (callback: (err: any, length?: number | null) => void) => void;
 	clear: (callback?: (err?: any) => void) => void;
-	touch: (sid: string, session: Express.SessionData, callback?: (err?: any) => void) => void;
+	touch: (sid: string, session: SessionData, callback?: (err?: any) => void) => void;
 }
 
 
