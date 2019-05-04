@@ -82,7 +82,7 @@ export class MySQLStore extends Store {
 	set: (sid: string, session: SessionData, callback?: (err?: any) => void) => void;
 	destroy: (sid: string, callback?: (err?: any) => void) => void;
 	all: (callback: (err: any, obj?: { [sid: string]: SessionData; } | null) => void) => void;
-	length: (callback: (err: any, length?: number | null) => void) => void;
+	length: (callback: (err: any, length: number) => void) => void;
 	clear: (callback?: (err?: any) => void) => void;
 	touch: (sid: string, session: SessionData, callback?: (err?: any) => void) => void;
 }
