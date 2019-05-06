@@ -1,5 +1,5 @@
 {
-  "name": "express-mysql-session",
+  "name": "@holdyourwaffle/express-mysql-session",
   "description": "A MySQL session store for express.js",
   "version": "2.1.1",
   "main": "index.js",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/chill117/express-mysql-session"
+    "url": "git://github.com/HoldYourWaffle/express-mysql-session"
   },
   "author": {
     "name": "Charles Hill",
@@ -35,7 +35,7 @@
     "cookie-parser": "1.4.4",
     "eslint": "5.15.3",
     "express": "4.16.4",
-    "express-session": "file:../express-session",
+    "express-session": "@holdyourwaffle/express-session",
     "mocha": "6.1.4",
     "mysql2": "1.6.5"
   },

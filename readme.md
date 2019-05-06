@@ -4,6 +4,10 @@ A MySQL session store for [express.js](http://expressjs.com/).
 
 [![Build Status](https://travis-ci.org/chill117/express-mysql-session.svg?branch=master)](https://travis-ci.org/chill117/express-mysql-session) [![Status of Dependencies](https://david-dm.org/chill117/express-mysql-session.svg)](https://david-dm.org/chill117/express-mysql-session)
 
+## In this fork
+This fork has [PR #93](https://github.com/chill117/express-mysql-session/pull/93) merged, meaning it can easily be used with TypeScript.
+Keep in mind that this package depends on [this fork of express-session](https://github.com/HoldYourWaffle/express-session) for its definitions.
+Once [express-session](https://github.com/expressjs/session) merges their [new definitions](https://github.com/expressjs/session/pull/656), [express-mysql-session](https://github.com/chill117/express-mysql-session) will be able to merge [*their* new definitions](https://github.com/chill117/express-mysql-session/pull/93), making this package obsolete.
 
 ## Installation
 
